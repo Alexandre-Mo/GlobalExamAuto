@@ -41,7 +41,7 @@ login = ""
 global password
 password = ""
 global lvl
-lvl = "C1"
+lvl = "Sort by level"
 global temps
 temps = 10
 global lire_fiche
@@ -145,13 +145,15 @@ def choix_type_section(): # Menu pour choisir la section à faire
         choix_type_section()
 
 def choix_lvl(): # Menu pour choisir le niveau
-    print('Choix du niveau (A1, A2, B1, B2, C1, C2):')
+    print('Choix du niveau (ALL, 1, A2, B1, B2, C1, C2):')
     global lvl
     lvl = input() # On demande à l'utilisateur de choisir un type d'exercice
     # si l'entré ne correspond pas à un niveau on relance le menu
-    if lvl != "A1" and lvl != "A2" and lvl != "B1" and lvl != "B2" and lvl != "C1" and lvl != "C2": # Si l'entré ne correspond pas à un niveau
+    if lvl != "ALL" and lvl != "A1" and lvl != "A2" and lvl != "B1" and lvl != "B2" and lvl != "C1" and lvl != "C2": # Si l'entré ne correspond pas à un niveau
         print('Veuillez entrer un niveau valide')
         choix_lvl()
+    elif lvl =="ALL":
+        lvl = "Sort by level"
 
 def temps_resolution(): # Menu pour choisir le temps de résolution
     print('Choix du temps de résolution (en secondes):')
@@ -337,7 +339,7 @@ def do_exercice(): # Faire les exercices
 
         # Cliquez sur le bouton "Validate"
         validate_button.click()
-        time.sleep(1)
+        time.sleep(2)
         if correspondance_lire_fiche[int(lire_fiche)][1] == True:
             try:
                 elem = WebDriverWait(driver, 30).until(
