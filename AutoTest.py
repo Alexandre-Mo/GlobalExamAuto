@@ -10,8 +10,12 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
+import chromedriver_autoinstaller
 
 
+chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
+                                      # and if it doesn't exist, download it automatically,
+                                      # then add chromedriver to path
 
 # Définition des variables
 global_exam_section_certification = "https://exam.global-exam.com/"
@@ -80,7 +84,7 @@ def menu(): # Menu principal
     print("- Type d'exercice : "+correspondance_type_nbr[int(type_exercice)][0])
     print("- Section : "+correspondance_type_section[int(type_section)][0])
     print("- Niveau : "+lvl)
-    print("- Temps de résolution des exercices: "+str(temps) + " secondes")
+    print("- Temps de résolution des exercices : "+str(temps) + " secondes")
     print("- Lire les fiches des exercices : "+correspondance_lire_fiche[int(lire_fiche)][0])
     print('\n1 = Lancement du programme | 2 = Options | 3 = Quitter')
     choix = input() # On demande à l'utilisateur de choisir une option
@@ -173,7 +177,7 @@ def choix_lire_fiche(): # Menu pour choisir si on lit la fiche ou non
 
 def launch_chrome(): # Lancement de chrome
     # Spécifiez le chemin vers le pilote du navigateur Chrome WebDriver
-    service = Service(executable_path='./chromedriver/chromedriver.exe') # chemin vers le driver chrome
+    #service = Service(executable_path='./chromedriver/chromedriver.exe') # chemin vers le driver chrome
     options = Options() # options du driver chrome
     options.add_argument("--start-maximized") # maximise la fenêtre
     options.page_load_strategy = 'eager' # permet de charger la page plus rapidement
@@ -181,7 +185,7 @@ def launch_chrome(): # Lancement de chrome
     mainWindow = None # variable pour stocker la fenêtre principale
     # Créez une instance du navigateur Chrome
     global driver
-    driver = webdriver.Chrome(service=service, options=options) # lance le driver chrome
+    driver = webdriver.Chrome(options=options) # lance le driver chrome
 
 def global_exam_connection(): # Connection à Global Exam
 
@@ -200,6 +204,8 @@ def global_exam_connection(): # Connection à Global Exam
             if handle != mainWindow: # si la fenêtre n'est pas la fenêtre principale
                 driver.switch_to.window(handle) # change de fenêtre
         
+        if driver.current_url == "https://auth.global-exam.com/login" : # si l'url actuel est l'url de connection à global exam
+            driver.get("https://moodle.cesi.fr/mod/lti/view.php?id=58498") # ouvre l'url de global exam
         driver.get("https://general.global-exam.com/") # ouvre l'url de global exam
         # on appui sur le bouton de type "button" contenant "General English"
         try:
@@ -266,9 +272,17 @@ def do_exercice(): # Faire les exercices
 
         select_lvl = Select(driver.find_element(By.XPATH, "//select[@class='h-8 px-4 appearance-none bg-background border border-solid border-neutral-10 w-full leading-snug rounded-size-24 cursor-pointer lg:pl-5 lg:py-3 lg:pr-8 lg:h-auto']")) # on cherche l'élément par son xpath
         select_lvl.select_by_visible_text(lvl)
-        button = driver.find_element(By.XPATH, '//button[contains(., "Test myself")]') # on cherche l'élément par son xpath
-        button.click()
-        time.sleep(1)
+        try:
+            elem = WebDriverWait(driver, 3).until(
+            EC.presence_of_element_located((By.XPATH, "//button[contains(., 'Test myself')]")) # on cherche l'élément par son xpath
+            )
+        except:
+            print("\n\n\nTous les exercices de cette catégorie et de ce niveau ont été complétés")
+            return
+        else:
+            button = driver.find_element(By.XPATH, '//button[contains(., "Test myself")]') # on cherche l'élément par son xpath
+            button.click()
+            time.sleep(1)
         
         
         exercice = "Answer the following exercise, each time noting down the 10 answers (you need 10 answers!!) (only the part you've completed) without anything else (especially not \"answer 1:\" before the answer), separated by a |.\n" # on crée la variable exercice qui contiendra le prompt

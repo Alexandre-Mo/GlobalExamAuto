@@ -1,3 +1,4 @@
 python-dotenv
 openai
 selenium
+chromedriver_autoinstaller
