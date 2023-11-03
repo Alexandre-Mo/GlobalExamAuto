@@ -1,6 +1,10 @@
-Bienvenue sur le projet GlobalExamAuto, développé en intégralité par Alexandre MOREAU.
+Bienvenue sur le projet GlobalExamAuto, développé par Alexandre MOREAU.
 Ce projet a pour but de compléter automatiquement des exercices GlobalExam, et de lire les fiches de cours associés.
 Pour le moment seul la langue Anglaise en catégorie général est disponible.
+
+Pour utiliser le programme, suivez les étapes suivantes :
+
+Prérequis : Avoir Python et Google Chrome installé
 
 1. Installez les packages : pip install -r requirements.txt
 
