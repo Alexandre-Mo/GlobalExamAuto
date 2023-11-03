@@ -135,7 +135,10 @@ launch_chrome()
 
 global_exam_connection()
 
+do_exercice()
+
 print('fini')
+
 time.sleep(15)
 
 driver.quit()
