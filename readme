@@ -1,0 +1,7 @@
+1. Installez les packages nécessaires : pip install -r requirements.txt
+
+2. Lancez le script : python main.py
+
+3. Enjoy !
+
+PS : Pour trouver votre clé API OPEN AI, rendez vous sur https://platform.openai.com/ et créé un compte si ce n'est pas déjà fait, ensuite dans le menu en haut à droite, cliquez sur "View API Keys"
