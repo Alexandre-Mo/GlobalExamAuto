@@ -1,6 +1,4 @@
-Bienvenue sur le projet GlobalExamAuto, développé par Alexandre MOREAU.
-Ce projet a pour but de compléter automatiquement des exercices GlobalExam, et de lire les fiches de cours associés.
-Pour le moment seul la langue Anglaise en catégorie général est disponible.
+Bienvenue sur le projet GlobalExamAuto, développé par Alexandre MOREAU. Ce projet a pour but de compléter automatiquement des exercices GlobalExam et de lire les fiches de cours associés. Pour le moment, seule la langue Anglaise en catégorie générale est disponible.
 
 Pour utiliser le programme, suivez les étapes suivantes :
 
