@@ -2,7 +2,11 @@ Bienvenue sur le projet GlobalExamAuto, développé par Alexandre MOREAU. Ce pro
 
 Pour utiliser le programme, suivez les étapes suivantes :
 
-Prérequis : Avoir Python et Google Chrome installé
+Prérequis : Avoir Python 3.10 (et uniquement cette version !!) et Google Chrome installé
+
+lien de DL python 3.10 : https://www.python.org/downloads/release/python-3100/
+
+Installation de l'outil :
 
 1. Installez les packages : pip install -r requirements.txt
 
